@@ -5,8 +5,10 @@ const wrapped = wrapping(gifts)
 console.log(wrapped)
 
 function wrapping(gifts) {
-  return gifts.map(gift=>{
-    const asterisk = '*'.repeat(gift.length) + '**'
-    return `${asterisk}\n*${gift}*\n${asterisk}`
-  })
+  const wrap = gift => {
+    const asterisk = '*'
+    const char = asterisk.repeat(gift.length + 2)
+    return `${char}\n*${gift}*\n${char}`
+  }
+  return gifts.map(wrap)
 }
