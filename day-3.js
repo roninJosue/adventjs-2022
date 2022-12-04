@@ -8,8 +8,7 @@ const reindeers = ['midudev', 'pheralb', 'codingwithdani', 'carlosble', 'blasco'
 distributeGifts(packOfGifts, reindeers)
 
 function distributeGifts(packOfGifts, reindeers) {
-  const totalWights = packOfGifts.reduce((total, pack) => total + pack.length, 0)
-  const totalCanCarry = reindeers.reduce((total, reindeer) => total + (reindeer.length * 2), 0)
-
-  return Math.floor(totalCanCarry / totalWights)
+  const totalWeight = packOfGifts.join('').length
+  const totalCanCarry = reindeers.join('').length * 2
+  return Math.floor(totalCanCarry / totalWeight)
 }
