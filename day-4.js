@@ -1,11 +1,8 @@
-/*const boxes = [
+const boxes2 = [
   { l: 1, w: 1, h: 1 },
   { l: 3, w: 3, h: 3 },
   { l: 2, w: 2, h: 2 }
-]*/
-const surface = ({l, w, h}) => {
-  return l * h * w
-}
+]
 
 const boxes = [
   {l: 1, w: 1, h: 1},
@@ -24,7 +21,7 @@ function fitsInOneBox(boxes) {
     if (l < l1 && w < w1 && h < h1) {
       biggerBox = boxes[i]
       fits++
-    }else fits++
+    }
   }
 
   console.log(fits)
