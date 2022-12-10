@@ -1,32 +1,30 @@
 console.time('test')
 const test10 = getMaxGifts([50, 10, 40, 1000, 500, 200], 199, 4)
+console.log(test10)
 console.timeEnd('test')
 
 function getMaxGifts(giftsCities, maxGifts, maxCities) {
-  let sub = []
-  function findSubsets(subset, nums, output, index) {
-
-    // Base Condition
-    if (index === nums.length) {
-      subset.push(output);
-      return;
+  let get_bit = function (num, bit) {
+    let temp = (1 << bit);
+    return (temp & num) === 0 ? 0 : 1;
+  };
+  let subsets = []
+  let get_all_subsets = function (v, sets) {
+    let subsets_count = Math.pow(2, v.length);
+    for (let i = 0; i < subsets_count; i++) {
+      let st = []
+      for (let j = 0; j < v.length; j++) {
+        if (get_bit(i, j) === 1) {
+          st.push(v[j]);
+        }
+      }
+      const subSum = st.reduce((a, c) => a + c, 0)
+      if (st.length <= maxCities && subSum <= maxGifts) {
+        sets.push(subSum);
+      }
     }
+  };
 
-    // Not Including Value which is at Index
-    findSubsets(subset, nums, [...output], index + 1);
-
-    // Including Value which is at Index
-    output.push(nums[index]);
-    findSubsets(subset, nums, [...output], index + 1);
-  }
-
-  findSubsets(sub, giftsCities, [], 0)
-  const _sub = sub.filter(s => s.length <= maxCities)
-
-  const ma = _sub.map((cur) => {
-   return cur.reduce((a, c) => a + c, 0)
-  })
-
-  const _sub2 = ma.filter(s => s <= maxGifts)
-  return _sub.length > 0 ? Math.max(..._sub2) : 0
+  get_all_subsets(giftsCities, subsets)
+  return Math.max(...subsets)
 }
